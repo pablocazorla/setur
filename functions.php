@@ -1,13 +1,19 @@
 <?php
 /***********************************************
+* REMOVE ADMIN BAR
+***********************************************/
+add_filter('show_admin_bar', '__return_false');
+/***********************************************
 * MENUS
 ***********************************************/
-if ( function_exists( 'add_theme_support' ) )
-add_theme_support( 'nav-menus' );
-
+if ( function_exists( 'add_theme_support' ) ){
+    add_theme_support( 'nav-menus' );
 	register_nav_menus(array(
-		'primary' => 'Primary Navigation'
-));
+		'main_left' => 'Main left',
+        'main_right' => 'Main right',
+        'paquetes' => 'Paquetes'
+    ));
+}
 
 /***********************************************
 * POST THUMBNAILS
@@ -21,9 +27,9 @@ add_image_size( 'custom-medium', 1200, 10000, false);
 add_image_size( 'custom-large', 1880, 15000, false);
 
 /* URL THUMBNAILS */
-function url_thumbnail($tamagno){
-	$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), $tamagno);
-	return $src[0];
+function url_thumbnail($id, $tamagno){
+	$src = wp_get_attachment_image_src( $id , 'medium');
+	echo $src[0];
 }
 
 // Override img caption shortcode to fix 10px issue.
@@ -60,53 +66,6 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 remove_filter('term_description','wpautop');
 
 /***********************************************
-* CUSTOM TYPE: ILLUSTRATION
-***********************************************/
-function create_illustration_type() {
-  $args = array(
-    'labels' => array(
-      'name' => 'Illustrations',
-      'singular_name' => 'Illustration'
-    ),
-    'public' => true,
-    'publicly_queryable' => true,
-    'show_ui' => true, 
-    'show_in_menu' => true, 
-    'query_var' => true,
-    'rewrite' => true,
-    'capability_type' => 'post',
-    'has_archive' => true, 
-    'hierarchical' => false,
-    'show_tagcloud' => false,
-    'show_in_nav_menus' => true,
-    'menu_position' => 5,
-    'menu_icon' => 'dashicons-format-gallery',
-    'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
-  ); 
-  register_post_type('illustration',$args);
-}
-add_action( 'init', 'create_illustration_type' );
-
-// Illustration Types
-function create_illustration_taxonomies() {
-    register_taxonomy(
-        'illustration',
-        'illustration',
-        array(
-            'labels' => array(
-                'name' => 'Illustration Types',
-                'singular_name' => 'Illustration Type'
-            ),
-            'show_ui' => true,
-            'show_tagcloud' => false,
-            'hierarchical' => true,
-            'show_in_nav_menus' => true
-        )
-    );
-}
-add_action( 'init', 'create_illustration_taxonomies', 0 );
-
-/***********************************************
 * SIDEBAR
 ***********************************************/
 function sidebar_init() {
@@ -133,5 +92,23 @@ function sidebar_init() {
 }
 add_action( 'widgets_init', 'sidebar_init' );
 add_theme_support( 'html5', array( 'search-form' ) );
+
+
+// Dependencies
+function setur_dependencies(){
+    // CSS
+    wp_enqueue_style( 'ubuntu_fonts', 'http://fonts.googleapis.com/css?family=Ubuntu:400,700,300,300italic', array(), '1');
+    wp_enqueue_style( 'theme', get_template_directory_uri() . '/css/theme.css', array(), '1');
+
+    wp_enqueue_style( 'style', get_stylesheet_uri());
+
+    // JS
+    wp_enqueue_script( 'html5shiv', get_template_directory_uri() . '/js/libs/html5-3.4-respond-1.1.0.min.js', array(), '1');
+    wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+    wp_enqueue_script( 'htmld_metaboxes', get_template_directory_uri() . '/js/htmld_metaboxes.js', array( 'jquery' ),'1' );
+    wp_enqueue_script( 'app', get_template_directory_uri() . '/js/app.js', array( 'jquery' ),'1' );    
+}
+
+add_action( 'wp_enqueue_scripts', 'setur_dependencies' );
 
 ?>

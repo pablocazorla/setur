@@ -2,7 +2,7 @@
 <!--[if IE 7]>    <html class="ie7 ie-lt-8 ie-lt-9 ie-lt-10" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 ie-lt-9 ie-lt-10" lang="en"> <![endif]-->
 <!--[if IE 9]>    <html class="ie9 ie-lt-10" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html lang="es"> <!--<![endif]-->
 <head>	
 	<title><?php
 	global $page, $paged;
@@ -19,17 +19,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="resource-type" content="document" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="content-language" content="en-us" />
-	<meta name="author" content="Pablo Cazorla" />
-	<meta name="contact" content="contact@pcazorla.com" />
-	<meta name="copyright" content="Designed by Pablo Cazorla - All rights reserved - <?php echo date('Y'); ?>." />	
-	
-	<link href="<?php bloginfo('template_url'); ?>/style.css" rel="stylesheet" type="text/css" />	
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	
+	<meta http-equiv="content-language" content="es-ar" />
 	<link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/favicon.ico" />	
 	<!--[if lt IE 9]>
-	<script src="<?php bloginfo('template_url'); ?>/js/libs/html5-3.4-respond-1.1.0.min.js"></script>
+	<script src="<?php bloginfo('template_url'); ?>"></script>
 	<script type="text/javascript">
 		ltIE9 = true;
 	</script>
@@ -42,14 +35,13 @@
 </head>
 <body>
 	<header id="main-header">
+		<a href="<?php bloginfo( 'url' ); ?>" id="main-brand" class="brand">
+			<img src="<?php bloginfo('template_url'); ?>/img/setur-logo.png" class="img-responsive">
+		</a>
 		<div class="wrap">
-			<a href="<?php bloginfo( 'url' ); ?>" id="main-brand" class="brand clearfix">
-				<?php bloginfo( 'name' ); ?>
-				<?php bloginfo( 'description' ); ?>
-			</a>
-			<menu id="main-menu">
-				<?php wp_nav_menu();?>
+			<menu id="main-menu" class="clearfix">
+				<?php wp_nav_menu( array('theme_location' => 'main_left','container' => false, 'menu_class' => 'clearfix main-menu-left')); ?>				
+				<?php wp_nav_menu( array('theme_location' => 'main_right','container' => false, 'menu_class' => 'clearfix main-menu-right')); ?>
 			</menu>
-		</div>
-		
+		</div>	
 	</header>

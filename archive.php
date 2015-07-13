@@ -3,7 +3,7 @@
 		<section class="post-list">
 			<?php $cat_name = single_cat_title('',false);?>
 			<header class="post-list-header">
-				<h1>
+				<h1> ARCHIVE_PHP
 					<?php if(is_category()):
 						echo $cat_name; 
 					elseif(is_tag()):
