@@ -8,6 +8,7 @@ body {
   color: #3b3b3b;
   background-color: #ffffff;
 }
+/*
 h1,
 .h1 {
   font-size: 57.6px;
@@ -89,6 +90,7 @@ h6,
 .h6 {
   font-weight: bold;
 }
+*/
 p {
   margin-bottom: 16px;
 }
@@ -146,6 +148,13 @@ a.disabled:focus,
   color: #d1c0bb;
   text-decoration: none;
 }
+
+
+::-webkit-input-placeholder {opacity:0.5;color: #3b3b3b;font-style: italic;}
+:-moz-placeholder {opacity:0.5;color: #3b3b3b;font-style: italic;}
+::-moz-placeholder {opacity:0.5;color: #3b3b3b;font-style: italic;}
+:-ms-input-placeholder {opacity:0.5;color: #3b3b3b;font-style: italic;}
+
 .align-left {
   text-align: left;
 }
@@ -287,11 +296,13 @@ table.striped tfoot {
 /* Box Model ***************/
 .clearfix,
 .wrap,
+.wrap-wide,
 .row {
   zoom: 1;
 }
 .clearfix:before,
 .wrap:before,
+.wrap-wide:before,
 .row:before,
 .clearfix:after,
 .wrap:after,
@@ -301,18 +312,22 @@ table.striped tfoot {
 }
 .clearfix:after,
 .wrap:after,
+.wrap-wide:after,
 .row:after {
   clear: both;
 }
-.wrap {
+.wrap,.wrap-wide {
   width: 92%;
-  max-width: 1200px;
+  max-width: 1264px;
   margin: 0 auto;
   position: relative;
 }
+.wrap-wide{
+  max-width: 1380px;
+}
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -18px;
+  margin-right: -18px;
 }
 .row .col-1,
 .row .col-2,
@@ -327,8 +342,8 @@ table.striped tfoot {
 .row .col-11,
 .row .col-12,
 .row .col {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
   float: left;
   min-height: 1px;
 }
@@ -395,7 +410,7 @@ form {
 }
 fieldset,
 .fieldset {
-  padding-bottom: 22.4px;
+  padding-bottom: 10px;
   zoom: 1;
 }
 fieldset:before,
