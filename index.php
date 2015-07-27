@@ -6,54 +6,46 @@
 			<div class="slider-multiple" id="home-slider-destinos">
 				<div class="slider-multiple-wrap">
 				<ul>
+					<?php
+					function slideContent($catName,$imgName,$po){
+						if($po=='post'){
+							$p = get_page_by_title('Camboriu');
+							$catLink = get_page_link($p->ID);
+						}else{
+							$catId = get_cat_ID($catName);
+							$catLink = get_category_link($catId);
+						}						
+						$src = get_bloginfo('template_url') . '/img/home/slide-destinos/'.$imgName.'.jpg';
+						return array(
+								'name' => $catName,
+								'href' => $catLink,
+								'src' => $src
+							);
+					}
+
+					$list = array(
+						's1' => slideContent('Egresados','img1','post'),
+						's2' => slideContent('Argentina','img2','cat'),
+						's3' => slideContent('Brasil','img3','cat'),
+						's4' => slideContent('Internacional','img4','cat'),
+						's5' => slideContent('Europa','img5','cat'),
+						's6' => slideContent('Caribe','img6','cat'),
+						's7' => slideContent('EEUU','img7','cat'),
+						's8' => slideContent('Uruguay','img8','cat')
+						);
+					$listCount = count($list);
+
+					for($j = 1; $j <= $listCount; $j++){
+						$item = $list['s'.$j];
+					?>
 					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img1.jpg">
-							<span>egresados</span>
+						<a href="<?php echo $item['href'];?>">
+							<img src="<?php echo $item['src'];?>">
+
+							<span><?php echo $item['name'];?></span>
 						</a>
 					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img2.jpg">
-							<span>argentina</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img3.jpg">
-							<span>brasil</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img4.jpg">
-							<span>internacional</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img5.jpg">
-							<span>europa</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img6.jpg">
-							<span>caribe</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img7.jpg">
-							<span>eeuu</span>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img src="<?php bloginfo('template_url'); ?>/img/home/slide-destinos/img8.jpg">
-							<span>uruguay</span>
-						</a>
-					</li>					
+					<?php } ?>
 				</ul>
 				</div>
 			</div>
@@ -66,18 +58,12 @@
 					<?php show_post_content('registracion'); ?>
 					</div>
 				</div>
-				<div class="home-grey-col grey-box">
+				<div class="home-grey-col grey-box home-box-testimonios testimonios-container">
 					<h3>Testimonios</h3>
 					<div class="testimonios">
-						<ul>
-							<li>
-								<p>Susana Lopez</p>
-								<p class="message">Estamos plenamente satisfechos con los servicios de "SETUR".	La organización y coordinación de las excursiones, los traslados 
-								y diversas actividades fue excelente. Muchas gracias por el nivel 
-								de profesionalismo y la cálida atención al cliente.!</p>
-								<p class="date">Marzo 2015</p>
-							</li>
-						</ul>
+						<?php include 'testimonios.php';?>
+						<div class="testimonios-arrow testimonios-prev"><span></span></div>
+						<div class="testimonios-arrow testimonios-next"><span></span></div>
 					</div>
 					
 				</div>
@@ -95,8 +81,13 @@
 					$the_query->the_post(); ?>
 				<li class="col-4">
 					<a href="<?php the_permalink(); ?>" rel="<?php the_ID();?>" >
-					<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id(),'destino-thumb'); ?>
-					<img src="<?php echo $src[0]; ?>" class="responsive unlimited"/>
+					<?php $src_a = wp_get_attachment_image_src( get_post_thumbnail_id(),'destino-thumb'); 
+							$src = $src_a[0];
+							if(!$src){
+								$src = get_bloginfo('template_url') . '/img/default-thumbnail.jpg';
+							}
+						?>
+					<img src="<?php echo $src; ?>" class=""/>
 					<figcaption class="ld-caption">
 						<h3><?php the_title(); ?></h3>
 					</figcaption>

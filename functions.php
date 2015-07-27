@@ -29,7 +29,7 @@ add_image_size( 'custom-large', 1880, 15000, false);*/
 
 /* URL THUMBNAILS */
 function url_thumbnail($id, $tamagno){
-	$src = wp_get_attachment_image_src( $id , 'medium');
+	$src = wp_get_attachment_image_src( $id , $tamagno);
 	echo $src[0];
 }
 
@@ -65,6 +65,34 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 * To remove <p> before category description
 **********************************************/
 remove_filter('term_description','wpautop');
+
+/***********************************************
+* CUSTOM TYPE: Testimonio
+***********************************************/
+function create_testimonio_type() {
+  $args = array(
+    'labels' => array(
+      'name' => 'Testimonios',
+      'singular_name' => 'Testimonio'
+    ),
+    'public' => true,
+    'publicly_queryable' => true,
+    'show_ui' => true, 
+    'show_in_menu' => true, 
+    'query_var' => true,
+    'rewrite' => true,
+    'capability_type' => 'post',
+    'has_archive' => true, 
+    'hierarchical' => false,
+    'show_tagcloud' => false,
+    'show_in_nav_menus' => true,
+    'menu_position' => 5,
+    'menu_icon' => 'dashicons-format-chat',
+    'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
+  ); 
+  register_post_type('testimonio',$args);
+}
+add_action( 'init', 'create_testimonio_type' );
 
 /***********************************************
 * SIDEBAR

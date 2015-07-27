@@ -1,46 +1,50 @@
-<?php get_header(); ?>
-	<article id="main-article" class="wrap archive search">		
-		<section class="post-list">
-			<header class="post-list-header">
-				<h1>
-					Results of "<?php echo $s; ?>"
-				</h1>
-			</header>
-			<?php if (have_posts()) :?>
-			<?php while (have_posts()) : the_post();?>
-			<div class="content" id="post-<?php the_ID();?>">
-				<a href="<?php the_permalink(); ?>">				
-					<?php if(has_post_thumbnail()){
-					the_post_thumbnail('thumbnail');
-					}else{ ?>
-					<img src="<?php bloginfo('template_url'); ?>/img/default-thumbnail.jpg" />
-					<?php } ?>
-				</a>
-				<div class="post-caption">											
-					<h2>
-						<a href="<?php the_permalink(); ?>">					
-							<?php the_title(); ?>
-						</a>
-					</h2>
-					<div class="category">
-						<?php the_category(', '); ?>					
-					</div>
-					<?php the_excerpt(); ?>
-				</div>
-			</div>
-			<?php endwhile; ?>
-			<?php else :?>
-			<h2>Sorry, not results/h2>
-			<?php endif; ?>
-			<nav class="pagination">
-				<?php		
-					next_posts_link('<span class="link-title">Next Posts</span>');
-					previous_posts_link('<span class="link-title">Previous Posts</span>');
-				?>
-			</nav>
-		</section>
-		<aside class="aside-sidebar">
+<?php get_header();?>
+<article id="main-article" class="search-page">
+	<section class="jumbo jumbo-category">
+		<img src="<?php bloginfo('template_url'); ?>/img/landscape-2.jpg" class="responsive unlimited jumbo-bg">
+		<div class="wrap"><?php get_search_form(); ?></div>
+	</section>
+	<div class="wrap top-shadow">
+		<img src="<?php bloginfo('template_url'); ?>/img/top-shadow.png" class="responsive">
+	</div>
+	<section class="wrap section-search">
+		<div class="section-col left">
 			<?php get_sidebar(); ?>
-		</aside>	
-	</article>
+		</div>
+		<div class="section-col right">
+				<h1>
+					Resultado de "<?php echo $s; ?>"
+				</h1>
+				<ul class="row list-destinos">
+				<?php if ( have_posts() ) : while ( have_posts() ): the_post(); ?>
+					<li class="col-4">
+						<a href="<?php the_permalink(); ?>" rel="<?php the_ID();?>" >
+						<?php $src_a = wp_get_attachment_image_src( get_post_thumbnail_id(),'destino-thumb'); 
+							$src = $src_a[0];
+							if(!$src){
+								$src = get_bloginfo('template_url') . '/img/default-thumbnail.jpg';
+							}
+						?>
+						<img src="<?php echo $src; ?>" class=""/>
+						<figcaption class="ld-caption">
+							<h3><?php the_title(); ?></h3>
+						</figcaption>
+						<?php if(get_post_meta($post->ID, 'htmld_precio', true)){ ?>
+						<div class="ld-price">
+							<span><?php echo get_post_meta($post->ID, 'htmld_moneda', true).'</span> '.get_post_meta($post->ID, 'htmld_precio', true); ?>
+						</div>
+						<?php } ?>
+						</a>
+					</li>					
+				<?php
+				endwhile;
+				else :
+					echo '<li class="col-12"><h3>No se encuentran destinos para esta categoría.</h3></li>';
+				endif;
+				?>
+				</ul>
+				<nav class="pagination"><?php echo paginate_links(array('prev_text' => '','next_text' => '')); ?></nav>
+		</div>
+	</section>
+</article>
 <?php get_footer(); ?>

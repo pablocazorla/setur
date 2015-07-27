@@ -9,87 +9,7 @@ body {
   background-color: #ffffff;
 }
 /*
-h1,
-.h1 {
-  font-size: 57.6px;
-  line-height: 1.3em;
-}
-h2,
-.h2 {
-  font-size: 38.72592593px;
-  line-height: 1.3em;
-}
-h3,
-.h3 {
-  font-size: 26.07407407px;
-  line-height: 1.3em;
-}
-h4,
-.h4 {
-  font-size: 18.4px;
-  line-height: 1.3em;
-}
-h5,
-.h5 {
-  font-size: 14.45925926px;
-  line-height: 1.3em;
-}
-h6,
-.h6 {
-  font-size: 13.00740741px;
-  line-height: 1.3em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: normal;
-  color: #111111;
-  margin-bottom: 16px;
-  padding-top: 11.2px;
-}
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small,
-.h1 small,
-.h2 small,
-.h3 small,
-.h4 small,
-.h5 small,
-.h6 small,
-h1 .small,
-h2 .small,
-h3 .small,
-h4 .small,
-h5 .small,
-h6 .small,
-.h1 .small,
-.h2 .small,
-.h3 .small,
-.h4 .small,
-.h5 .small,
-.h6 .small {
-  font-weight: normal;
-  line-height: 1;
-}
-h5,
-.h5,
-h6,
-.h6 {
-  font-weight: bold;
-}
+
 */
 p {
   margin-bottom: 16px;
@@ -404,10 +324,6 @@ table.striped tfoot {
   padding-left: 0;
   padding-right: 0;
 }
-form {
-  max-width: 700px;
-  margin: 0 auto 16px;
-}
 fieldset,
 .fieldset {
   padding-bottom: 10px;
@@ -567,9 +483,9 @@ textarea {
   resize: none;
 }
 select {
-  -webkit-appearance: none;
+ /* -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  appearance: none;*/
   text-align: center;
 }
 input[type="radio"],
@@ -1138,3 +1054,4 @@ img.responsive.unlimited {
   width: 100% !important;
   max-width: auto;
 }
+

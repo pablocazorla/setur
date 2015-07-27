@@ -8,43 +8,26 @@
 			<img src="<?php bloginfo('template_url'); ?>/img/top-shadow.png" class="responsive">
 		</div>
 		<section class="wrap section-category">
-			<div class="section-category-col left">
+			<div class="section-col left">
 				<div class="category-menu-container">
 					<h3>Paquetes</h3>
 				<?php wp_nav_menu( array('menu' => 'paquetes','container' => false)); ?>
 				</div>
-
-				<div class="grey-box categories-box-testimonios">
-					<h3>Testimonios</h3>
-					<div class="testimonios">
-						<ul>
-							<li>
-								<p>Susana Lopez</p>
-								<p class="message">Estamos plenamente satisfechos con los servicios de "SETUR".	La organización y coordinación de las excursiones, los traslados 
-								y diversas actividades fue excelente. Muchas gracias por el nivel 
-								de profesionalismo y la cálida atención al cliente.!</p>
-								<p class="date">Marzo 2015</p>
-							</li>
-						</ul>
-					</div>
-					<span class="testimonios-arrow testimonios-prev"></span>
-					<span class="testimonios-arrow testimonios-next"></span>
-				</div>
-				<a href="" class="facebook-follow-link">
-					<span class="fb-logo"><img src="<?php bloginfo('template_url'); ?>/img/facebook-logo.png" class="responsive"></span>
-					
-					<span class="fb-follow">Seguinos</span>
-				</a>
-
+				<?php get_sidebar(); ?>
 			</div>
-			<div class="section-category-col right">
+			<div class="section-col right">
 				<h1><span class="icon icon-category-title"></span> <?php single_cat_title(); ?></h1>
 				<ul class="row list-destinos">
 				<?php if ( have_posts() ) : while ( have_posts() ): the_post(); ?>
 					<li class="col-4">
 						<a href="<?php the_permalink(); ?>" rel="<?php the_ID();?>" >
-						<?php $src = wp_get_attachment_image_src( get_post_thumbnail_id(),'destino-thumb'); ?>
-						<img src="<?php echo $src[0]; ?>" class=""/>
+						<?php $src_a = wp_get_attachment_image_src( get_post_thumbnail_id(),'destino-thumb'); 
+							$src = $src_a[0];
+							if(!$src){
+								$src = get_bloginfo('template_url') . '/img/default-thumbnail.jpg';
+							}
+						?>
+						<img src="<?php echo $src; ?>" class=""/>
 						<figcaption class="ld-caption">
 							<h3><?php the_title(); ?></h3>
 						</figcaption>
@@ -62,6 +45,8 @@
 				endif;
 				?>
 				</ul>
+				<nav class="pagination"><?php echo paginate_links(array('prev_text' => '','next_text' => '')); ?></nav>
+				
 			</div>
 		</section>
 </article>

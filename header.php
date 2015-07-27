@@ -36,7 +36,7 @@
 <body>
 	<header id="main-header">
 		<a href="<?php bloginfo( 'url' ); ?>" id="main-brand" class="brand">
-			<img src="<?php bloginfo('template_url'); ?>/img/setur-logo.png" class="img-responsive">
+			<img src="<?php bloginfo('template_url'); ?>/img/setur-logo.gif" class="img-responsive">
 		</a>
 		<div class="wrap">
 			<menu id="main-menu" class="clearfix">
